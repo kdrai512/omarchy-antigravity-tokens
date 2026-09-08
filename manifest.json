@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "mrworld.antigravity-tokens",
+  "name": "Antigravity Tokens",
+  "version": "1.0.0",
+  "author": "mrworld",
+  "description": "Remaining tokens and quota limits for Antigravity CLI",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Antigravity Tokens",
+    "description": "Displays remaining token quota for Google Antigravity CLI",
+    "category": "AI",
+    "defaultSection": "right",
+    "allowMultiple": false
+  }
+}

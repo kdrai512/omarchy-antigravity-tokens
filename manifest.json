@@ -1,21 +1,83 @@
 {
   "schemaVersion": 1,
   "id": "mrworld.antigravity-tokens",
-  "name": "Antigravity Tokens",
-  "version": "1.0.0",
+  "name": "Antigravity Tokens & Usage",
+  "version": "1.2.0",
   "author": "mrworld",
-  "description": "Remaining tokens and quota limits for Antigravity CLI",
-  "kinds": [
-    "bar-widget"
-  ],
+  "license": "MIT",
+  "description": "Antigravity active sessions, token limits, quota metrics (/usage), model breakdown, prompt history, and tool telemetry in the Omarchy bar.",
+  "kinds": ["bar-widget"],
+  "activation": "on-demand",
   "entryPoints": {
-    "barWidget": "BarWidget.qml"
+    "barWidget": "Widget.qml"
   },
   "barWidget": {
-    "displayName": "Antigravity Tokens",
-    "description": "Displays remaining token quota for Google Antigravity CLI",
+    "displayName": "Antigravity Tokens & Usage",
+    "description": "Shows Antigravity active agent status, sessions, prompt stats, and token quota.",
     "category": "AI",
-    "defaultSection": "right",
-    "allowMultiple": false
+    "allowMultiple": false,
+    "defaults": {
+      "refreshIntervalSec": 60,
+      "badgeMode": "percent",
+      "showBadge": true,
+      "enableQuotaAlerts": true,
+      "quotaAlertThreshold": 15,
+      "terminalCommand": "",
+      "recentSessionsLimit": 5
+    },
+    "schema": [
+      {
+        "key": "refreshIntervalSec",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "min": 10,
+        "max": 1800,
+        "step": 10,
+        "defaultValue": 60
+      },
+      {
+        "key": "badgeMode",
+        "type": "enum",
+        "label": "Bar badge mode",
+        "options": ["percent", "active", "prompts", "off"],
+        "defaultValue": "percent"
+      },
+      {
+        "key": "showBadge",
+        "type": "boolean",
+        "label": "Show count/percent badge in bar",
+        "defaultValue": true
+      },
+      {
+        "key": "enableQuotaAlerts",
+        "type": "boolean",
+        "label": "Low quota desktop alerts",
+        "defaultValue": true
+      },
+      {
+        "key": "quotaAlertThreshold",
+        "type": "integer",
+        "label": "Low quota alert threshold (%)",
+        "min": 5,
+        "max": 50,
+        "step": 5,
+        "defaultValue": 15
+      },
+      {
+        "key": "terminalCommand",
+        "type": "string",
+        "label": "Terminal emulator override",
+        "defaultValue": ""
+      },
+      {
+        "key": "recentSessionsLimit",
+        "type": "integer",
+        "label": "Default recent sessions count",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "defaultValue": 5
+      }
+    ]
   }
 }

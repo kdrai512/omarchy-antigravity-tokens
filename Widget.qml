@@ -1196,10 +1196,11 @@ BarWidget {
         delegate: RowLayout {
           required property var modelData
           Layout.fillWidth: true
-          spacing: 6
+          spacing: 8
           readonly property real count: modelData ? Number(modelData.messageCount || modelData.prompts || 0) : 0
 
           Text {
+            id: dateLabel
             textFormat: Text.PlainText
             text: {
               var d = modelData.date
@@ -1211,7 +1212,7 @@ BarWidget {
             color: dim
             font.family: fontFamily
             font.pixelSize: 10
-            Layout.preferredWidth: 48
+            Layout.preferredWidth: 64
           }
 
           Rectangle {
@@ -1240,7 +1241,7 @@ BarWidget {
             font.pixelSize: 10
             font.bold: true
             horizontalAlignment: Text.AlignRight
-            Layout.preferredWidth: 62
+            Layout.preferredWidth: 64
           }
         }
       }

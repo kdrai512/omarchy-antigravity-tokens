@@ -70,6 +70,19 @@ def main() -> None:
     args = parser.parse_args()
 
     record = collect(default_base_dir(), force=args.force)
+
+    # Sync state file to Omarchy agents usage directory
+    try:
+        usage_dir = Path(os.path.expanduser("~/.local/state/omarchy/agents/usage"))
+        usage_dir.mkdir(parents=True, exist_ok=True)
+        tmp = usage_dir / ".antigravity.json.tmp"
+        target = usage_dir / "antigravity.json"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(record, f, indent=2, ensure_ascii=False)
+        tmp.replace(target)
+    except Exception:
+        pass
+
     if args.limits_only:
         print(json.dumps(record.get("limits", []), indent=2, ensure_ascii=False))
     else:

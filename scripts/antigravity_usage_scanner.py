@@ -991,6 +991,18 @@ def scan(base_dir: Path, force: bool = False) -> dict[str, Any]:
     except Exception:
         pass
 
+    # Sync to Omarchy agents usage state directory
+    try:
+        omarchy_usage_dir = Path(os.path.expanduser("~/.local/state/omarchy/agents/usage"))
+        if omarchy_usage_dir.exists():
+            tmp_omarchy = omarchy_usage_dir / ".antigravity.json.tmp"
+            target_omarchy = omarchy_usage_dir / "antigravity.json"
+            with open(tmp_omarchy, "w", encoding="utf-8") as f:
+                json.dump(result, f, indent=2, ensure_ascii=False)
+            tmp_omarchy.replace(target_omarchy)
+    except Exception:
+        pass
+
     return result
 
 
